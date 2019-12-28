@@ -1,0 +1,61 @@
+/*****************************************************************************
+
+		Copyright (c) Rashid Yangurazov Lens
+
+ Project:  
+ FileName: EX2.PRO
+ Written by: Rashid Yangurazov
+ Comments: 
+******************************************************************************/
+
+predicates
+  can_buy(symbol, symbol) - nondeterm(i,o), nondeterm(o,o)/* "can_buy" relationship */
+  person(symbol) - nondeterm(i), nondeterm(o) /* "person" relationship */ 
+  car(symbol) - nondeterm(i), nondeterm(o) /* "car" relationship */
+  laptop(symbol) - nondeterm(i), nondeterm(o) /* "laptop" relationship */
+  likes(symbol, symbol) - nondeterm(i, i), nondeterm(i, o)/* "likes" relationship */
+  for_sale(symbol) - nondeterm(i), nondeterm(o) /* "for_sale" relationship */
+
+clauses
+  can_buy(X, Y):-
+    person(X),
+    car(Y),
+    likes(X,Y),
+    for_sale(Y).
+  can_buy(X, Y):-
+    person(X),
+    laptop(Y),
+    likes(X,Y),
+    for_sale(Y).
+    
+  person(oleg).
+  person(max).
+  person(slava).
+  person(irina).
+  person(andrei).
+  person(aleksandr).
+
+  car(tesla).
+  car(bmw).
+  car(lamborgini).
+  car(hyundai).
+  car(mercedez_benz).
+  car(volvo).
+  car(infinity).
+  
+  laptop(asus).
+  laptop(hp).
+  laptop(samsung).
+  laptop(apple).
+  
+  likes(max, volvo).
+  likes(andrei, bmw).
+  likes(irina, infinity).
+  likes(aleksandr, apple).
+  
+  for_sale(volvo).
+  for_sale(apple).
+  for_sale(infinity).
+  
+goal
+  can_buy(Who, What),nl.
